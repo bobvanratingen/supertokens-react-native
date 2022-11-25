@@ -13,7 +13,7 @@
  * under the License.
  */
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import EncryptedStorage from "react-native-encrypted-storage";
 import AuthHttpRequest from "./fetch";
 
 const TOKEN_KEY = "supertokens-rn-anticsrf-key";
@@ -35,7 +35,7 @@ export default class AntiCSRF {
         }
 
         async function getAntiCSRFFromStorage(): Promise<string | null> {
-            let fromStorage = await AsyncStorage.getItem(TOKEN_KEY);
+            let fromStorage = await EncryptedStorage.getItem(TOKEN_KEY);
 
             if (fromStorage !== null) {
                 let value = "; " + fromStorage;
@@ -110,7 +110,7 @@ export default class AntiCSRF {
                 valueToSet = `${ANTI_CSRF_NAME}=${cookieVal};domain=${domain};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/;samesite=lax`;
             }
 
-            await AsyncStorage.setItem(TOKEN_KEY, valueToSet);
+            await EncryptedStorage.setItem(TOKEN_KEY, valueToSet);
         }
 
         await setAntiCSRFToStorage(antiCSRFToken, "");
@@ -131,6 +131,6 @@ export default class AntiCSRF {
 
     static async removeToken() {
         AntiCSRF.tokenInfo = undefined;
-        await AsyncStorage.removeItem(TOKEN_KEY);
+        await EncryptedStorage.removeItem(TOKEN_KEY);
     }
 }

@@ -1,7 +1,7 @@
 {
   "name": "supertokens-react-native",
   "version": "3.2.0",
-  "description": "React Native SDK for SuperTokens",
+  "description": "React Native SDK for SuperTokens using react-native-encrypted-storage",
   "main": "index.js",
   "scripts": {
     "build-check": "cd lib && npx tsc -p tsconfig.json --skipLibCheck --noEmit",
@@ -32,16 +32,16 @@
   },
   "homepage": "https://github.com/supertokens/supertokens-react-native#readme",
   "peerDependencies": {
-    "axios": "*",
+    "axios": "0.21.4",
     "react-native": ">=0.61.5 <1.0.x",
-    "@react-native-async-storage/async-storage": ">=1.13.0 <2.0.x"
+    "react-native-encrypted-storage": "^4.0.3"
   },
   "devDependencies": {
-    "@react-native-async-storage/async-storage": "^1.13.0",
+    "react-native-encrypted-storage": "^4.0.3",
     "@size-limit/preset-small-lib": "^6.0.4",
     "@types/base-64": "^1.0.0",
     "@types/react-native": "0.62.0",
-    "axios": "*",
+    "axios": "0.21.4",
     "prettier": "1.18.2",
     "size-limit": "^6.0.4",
     "typescript": "3.8.3",
