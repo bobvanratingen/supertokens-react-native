@@ -37,7 +37,7 @@ export default class AntiCSRF {
         async function getAntiCSRFFromStorage(): Promise<string | null> {
             let fromStorage = await EncryptedStorage.getItem(TOKEN_KEY);
 
-            if (fromStorage !== null) {
+            if (fromStorage !== null && fromStorage !== undefined) {
                 let value = "; " + fromStorage;
                 let parts = value.split("; " + ANTI_CSRF_NAME + "=");
 

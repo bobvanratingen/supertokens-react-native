@@ -21,7 +21,7 @@ export default class FrontToken {
         async function getFrontTokenFromStorage(): Promise<string | null> {
             let frontTokenFromStorage = await EncryptedStorage.getItem(FRONT_TOKEN_KEY);
 
-            if (frontTokenFromStorage !== null) {
+            if (frontTokenFromStorage !== null && frontTokenFromStorage !== undefined) {
                 let value = "; " + frontTokenFromStorage;
                 let parts = value.split("; " + FRONT_TOKEN_NAME + "=");
 
