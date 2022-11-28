@@ -13,7 +13,7 @@
  * under the License.
  */
 
-import EncryptedStorage from "react-native-encrypted-storage";
+import CustomAsyncStorage from "./customAsyncStorage";
 import AuthHttpRequest, { onUnauthorisedResponse } from "./fetch";
 import { IdRefreshTokenType } from "./types";
 
@@ -28,7 +28,7 @@ export default class IdRefreshToken {
     static async getIdRefreshToken(tryRefresh: boolean): Promise<IdRefreshTokenType> {
         async function getIdRefreshFromStorage() {
             if (IdRefreshToken.idRefreshInMemory === undefined) {
-                let k = await EncryptedStorage.getItem(ID_KEY);
+                let k = await CustomAsyncStorage.getItem(ID_KEY);
                 IdRefreshToken.idRefreshInMemory = k === null ? undefined : k;
             }
 
@@ -126,7 +126,7 @@ export default class IdRefreshToken {
             }
 
             let valueToSet = `${ID_REFRESH_TOKEN_NAME}=${cookieVal};expires=${expires};domain=${domain};path=/;samesite=lax`;
-            await EncryptedStorage.setItem(ID_KEY, valueToSet);
+            await CustomAsyncStorage.setItem(ID_KEY, valueToSet);
             IdRefreshToken.idRefreshInMemory = valueToSet;
         }
 
@@ -157,7 +157,7 @@ export default class IdRefreshToken {
     }
 
     static async removeToken() {
-        await EncryptedStorage.removeItem(ID_KEY);
+        await CustomAsyncStorage.removeItem(ID_KEY);
         IdRefreshToken.idRefreshInMemory = undefined;
     }
 }

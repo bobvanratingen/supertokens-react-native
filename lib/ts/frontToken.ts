@@ -1,4 +1,4 @@
-import EncryptedStorage from "react-native-encrypted-storage";
+import CustomAsyncStorage from "./customAsyncStorage";
 import AuthHttpRequest from "./fetch";
 import IdRefreshToken from "./idRefreshToken";
 import { decode as atob } from "base-64";
@@ -19,7 +19,8 @@ export default class FrontToken {
         }
 
         async function getFrontTokenFromStorage(): Promise<string | null> {
-            let frontTokenFromStorage = await EncryptedStorage.getItem(FRONT_TOKEN_KEY);
+            let frontTokenFromStorage = await CustomAsyncStorage.getItem(FRONT_TOKEN_KEY);
+            console.log("frontTokenFromStorage", frontTokenFromStorage);
 
             if (frontTokenFromStorage !== null && frontTokenFromStorage !== undefined) {
                 let value = "; " + frontTokenFromStorage;
@@ -92,7 +93,7 @@ export default class FrontToken {
                 valueToSet = `${FRONT_TOKEN_NAME}=${cookieVal};domain=${domain};expires=Fri, 31 Dec 9999 23:59:59 GMT;path=/;samesite=lax`;
             }
 
-            await EncryptedStorage.setItem(FRONT_TOKEN_KEY, valueToSet);
+            await CustomAsyncStorage.setItem(FRONT_TOKEN_KEY, valueToSet);
         }
 
         await setFrontTokenToStorage(frontToken, "");
